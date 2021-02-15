@@ -29,9 +29,9 @@ namespace SwisPowerShell
         public Type CreateType(IEnumerable<Pair<string, Type>> properties)
         {
             TypeBuilder typeBuilder = _moduleBuilder.DefineType(GetDynamicName(), TypeAttributes.Public);
+            Type type = typeBuilder.CreateType();
 
             AddProperties(typeBuilder, properties);
-            Type type = typeBuilder.CreateType();
             return type;
         }
 
