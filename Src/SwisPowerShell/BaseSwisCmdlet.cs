@@ -2,22 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Management.Automation;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using SolarWinds.InformationService.Contract2;
 
 namespace SwisPowerShell
 {
-    public abstract class BaseSwisCmdlet : Cmdlet
+    public abstract class BaseSwisCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0)]
         public InfoServiceProxy SwisConnection { get; set; }
 
         protected void ReportException(FaultException<InfoServiceFaultContract> faultEx)
         {
-            WriteError(new ErrorRecord(faultEx, "SwisError", ErrorCategory.InvalidOperation, null)
-            { ErrorDetails = new ErrorDetails(faultEx.Detail.Message) });
+
         }
 
         protected void CheckConnection()
@@ -29,9 +26,8 @@ namespace SwisPowerShell
             }
         }
 
-        protected override void ProcessRecord()
+        protected void ProcessRecord()
         {
-            base.ProcessRecord();
             using (CreateSwisContext())
                 DoWithExceptionReporting(InternalProcessRecord);
         }
@@ -70,17 +66,14 @@ namespace SwisPowerShell
                 msg = (ex.InnerException as FaultException).Message;
             else
                 msg = ex.Message;
-            WriteError(new ErrorRecord(ex, "SwisError", ErrorCategory.InvalidOperation, null) { ErrorDetails = new ErrorDetails(msg) });
         }
 
         protected void ReportException(FaultException ex)
         {
-            WriteError(new ErrorRecord(ex, "SwisError", ErrorCategory.InvalidOperation, null) { ErrorDetails = new ErrorDetails(ex.Reason.ToString()) });
         }
 
         protected void ReportException(Exception ex)
         {
-            WriteError(new ErrorRecord(ex, "SwisError", ErrorCategory.InvalidOperation, null) { ErrorDetails = new ErrorDetails(ex.Message) });
         }
 
         protected static PropertyBag PropertyBagFromHashtable(Hashtable properties)
@@ -90,10 +83,6 @@ namespace SwisPowerShell
 
         protected internal static object PropertyBagFromDictionary(object obj)
         {
-            var psObject = obj as PSObject;
-            if (psObject != null)
-                obj = psObject.BaseObject;
-
             var dict = obj as IDictionary;
             if (dict != null)
             {

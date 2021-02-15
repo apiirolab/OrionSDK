@@ -1,22 +1,21 @@
 ﻿using System.ComponentModel;
-using System.Management.Automation;
 
 namespace SwisPowerShell
 {
     [RunInstaller(true)]
-    public class SwisSnapIn : PSSnapIn
+    public class SwisSnapIn
     {
-        public override string Description
+        public string Description
         {
             get { return "PowerShell Snap-in for the SolarWinds Information Service"; }
         }
 
-        public override string Name
+        public string Name
         {
             get { return "SwisSnapIn"; }
         }
 
-        public override string Vendor
+        public string Vendor
         {
             get { return "SolarWinds, Inc."; }
         }

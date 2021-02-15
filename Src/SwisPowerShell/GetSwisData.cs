@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using System.Management.Automation;
 using System.Text;
 using System.Xml;
 using SolarWinds.InformationService.Contract2;
@@ -9,20 +8,16 @@ using SolarWinds.InformationService.InformationServiceClient;
 
 namespace SwisPowerShell
 {
-    [Cmdlet(VerbsCommon.Get, "SwisData")]
     public class GetSwisData : BaseSwisCmdlet
     {
         private static readonly string[] returnClauses = new[] { "RETURN XML AUTO", "RETURN XML AUTO STRICT", "RETURN XML RAW" };
 
         private int timeOut = 30;
 
-        [Parameter(Mandatory = true, Position = 1)]
         public string Query { get; set; }
 
-        [Parameter(Position = 2)]
         public Hashtable Parameters { get; set; }
 
-        [Parameter(Mandatory = false, HelpMessage = "Query timeout in seconds", Position = 3)]
         public int TimeOut
         {
             get { return timeOut; }
@@ -48,7 +43,6 @@ namespace SwisPowerShell
                         bag = PropertyBagFromHashtable(Parameters);
                     }
                     XmlDictionaryReader xmlReader = reader.GetXmlData(Query, bag);
-                    WriteObject(xmlReader.ReadOuterXml());
                 }
             }
             else
@@ -79,8 +73,6 @@ namespace SwisPowerShell
                     {
                         var factory = new DataReaderObjectFactory(reader);
                         var enumerator = factory.GetEnumerator();
-                        while (enumerator.MoveNext())
-                            WriteObject(enumerator.Current);
 
                         if (reader.Errors != null)
                         {
@@ -93,7 +85,6 @@ namespace SwisPowerShell
                                 sbWarningMessages.AppendLine(string.Format("Message : {0}", errorMessage.Message));
                                 sbWarningMessages.AppendLine("-------------------------------------------------");
                             }
-                            WriteWarning(sbWarningMessages.ToString());
                         }
                     }
                 }
