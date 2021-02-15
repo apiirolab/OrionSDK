@@ -42,9 +42,7 @@ namespace SolarWinds.InformationService.Contract2
         public static XmlQualifiedName GetSchema(XmlSchemaSet xs)
         {
             var schemaSerializer = new XmlSerializer(typeof(XmlSchema));
-            var s = (XmlSchema)schemaSerializer.Deserialize(new StringReader(Resources.PropertyBagSchema));
             xs.XmlResolver = new XmlUrlResolver();
-            xs.Add(s);
 
             return new XmlQualifiedName("dictionary", Constants.PropertyBagNamespace);
         }
@@ -146,7 +144,7 @@ namespace SolarWinds.InformationService.Contract2
                     string typeName = valueType.FullName;
                     if (valueType == typeof(PropertyBag))
                     {
-                        // Old contracts can't deserialize an item value of type PropertyBag. Lie to them that this is a 
+                        // Old contracts can't deserialize an item value of type PropertyBag. Lie to them that this is a
                         // string and put an attribute to indicate that it is really a PropertyBag.
                         writer.WriteAttributeString("overrideType", propertyBagTypeName);
                         typeName = typeof(string).FullName;
