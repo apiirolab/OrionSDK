@@ -46,8 +46,8 @@ namespace SwisPowerShell
 
         private void AddProperty(TypeBuilder builder, string propertyName, Type propertyType)
         {
-            Type type = propertyType;
             string fieldName = string.Format("_{0}", propertyName);
+            Type type = propertyType;
             if (type.IsValueType)
             {
                 type = GetNullableType(type);
