@@ -27,7 +27,7 @@ namespace SwisPowerShell
         {
             int ordinal = Array.FindIndex(_columns,
                 s => s.Equals(name, ignoreCase ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture));
-            if (ordinal != -1)
+            if (ordinal > -1)
             {
                 value = _reader[ordinal];
                 return true;
