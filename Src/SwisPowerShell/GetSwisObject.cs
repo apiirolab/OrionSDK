@@ -8,8 +8,8 @@ namespace SwisPowerShell
 
         protected override void InternalProcessRecord()
         {
-            CheckConnection();
             Dictionary<string, object> obj = null;
+            CheckConnection();
             DoWithExceptionReporting(() => obj = SwisConnection.Read(Uri));
 
         }
