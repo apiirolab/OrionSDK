@@ -29,9 +29,9 @@ namespace SwisPowerShell
         public Type CreateType(IEnumerable<Pair<string, Type>> properties)
         {
             TypeBuilder typeBuilder = _moduleBuilder.DefineType(GetDynamicName(), TypeAttributes.Public);
+            Type type = typeBuilder.CreateType();
 
             AddProperties(typeBuilder, properties);
-            Type type = typeBuilder.CreateType();
             return type;
         }
 
@@ -46,8 +46,8 @@ namespace SwisPowerShell
 
         private void AddProperty(TypeBuilder builder, string propertyName, Type propertyType)
         {
-            string fieldName = string.Format("_{0}", propertyName);
             Type type = propertyType;
+            string fieldName = string.Format("_{0}", propertyName);
             if (type.IsValueType)
             {
                 type = GetNullableType(type);
