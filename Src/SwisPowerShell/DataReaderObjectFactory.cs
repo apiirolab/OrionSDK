@@ -38,9 +38,8 @@ namespace SwisPowerShell
             else
             {
                 int fieldCount = _dataReader.FieldCount;
-
-                var properties = new List<Pair<string, Type>>();
                 var columns = new List<string>();
+                var properties = new List<Pair<string, Type>>();
                 for (int i = 0; i < fieldCount; i++)
                 {
                     string name = _dataReader.GetName(i);
