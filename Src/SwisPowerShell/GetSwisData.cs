@@ -12,17 +12,15 @@ namespace SwisPowerShell
     {
         private static readonly string[] returnClauses = new[] { "RETURN XML AUTO", "RETURN XML AUTO STRICT", "RETURN XML RAW" };
 
-        private int timeOut = 30;
-
+        public bool op_GreaterThan(GetSwisData x, int a)
+        {
+            return true;
+        }
         public string Query { get; set; }
 
         public Hashtable Parameters { get; set; }
 
-        public int TimeOut
-        {
-            get { return timeOut; }
-            set { timeOut = value; }
-        }
+        public int TimeOut { get; set; } = 30;
 
         protected override IDisposable CreateSwisContext()
         {
@@ -57,7 +55,6 @@ namespace SwisPowerShell
                 connection.Open();
                 using (var command = new InformationServiceCommand(Query, connection))
                 {
-                    command.CommandTimeout = timeOut;
                     command.ApplicationTag = "SwisPowerShell";
 
                     if (Parameters != null)
