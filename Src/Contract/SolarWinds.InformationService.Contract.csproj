@@ -31,12 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="PropertyBag.xsd">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
