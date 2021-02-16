@@ -4,9 +4,10 @@ namespace SwisPowerShell
 {
     public class RemoveSwisObject : BaseSwisCmdlet
     {
+        private readonly List<string> uris = new List<string>();
+
         public string Uri { get; set; }
 
-        private readonly List<string> uris = new List<string>();
 
         protected override void InternalProcessRecord()
         {
