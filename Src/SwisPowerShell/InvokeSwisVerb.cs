@@ -14,10 +14,10 @@ namespace SwisPowerShell
 
         public string EntityName { get; set; }
 
+        public List<object> Arguments { get; set; }
+
         public string Verb { get; set; }
 
-
-        public List<object> Arguments { get; set; }
 
         protected override void InternalProcessRecord()
         {
