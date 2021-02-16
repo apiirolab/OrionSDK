@@ -12,12 +12,14 @@ namespace SwisPowerShell
 {
     public class PropertySetter
     {
-        private readonly PropertyInfo[] _properties;
 
         public PropertySetter(Type type)
         {
             _properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
         }
+
+        private readonly PropertyInfo[] _properties;
+
 
         public void SetValues(object target, IIndexedByName row, bool ignoreCase)
         {
