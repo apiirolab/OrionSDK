@@ -4,9 +4,9 @@ namespace SwisPowerShell
 {
     public class NewSwisObject : BaseSwisCmdlet
     {
-        public string EntityType { get; set; }
-
         public Hashtable Properties { get; set; }
+        
+        public string EntityType { get; set; }
 
         protected override void InternalProcessRecord()
         {
